@@ -1,15 +1,11 @@
 <script>
-export default {
-    data() {
-        return {
-            count: 0,
-        };
-    },
-};
+export default {};
 </script>
 
 <template>
-    <button class="bg-slate-500" @click="count++">
-        You clicked me {{ count }} times.
-    </button>
+    <div class="h-16 bg-slate-800 grid">
+        <h1 class="justify-self-center self-center text-white font-bold">
+            Mock eCommerce
+        </h1>
+    </div>
 </template>

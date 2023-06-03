@@ -15,8 +15,8 @@ import { createApp } from "vue";
 
 const app = createApp({});
 
-import ExampleComponent from "./components/organism/ExampleComponent.vue";
-app.component("example-component", ExampleComponent);
+import HomePage from "./components/organism/HomePage.vue";
+app.component("home-page", HomePage);
 
 /**
  * The following block of code may be used to automatically register your
