@@ -1,31 +1,14 @@
 <script>
 import Header from "../atom/Header.vue";
-import ProductList from "../molecule/ProductList.vue";
+import CatalogueDisplay from "./CatalogueDisplay.vue";
 import { defineComponent } from "vue";
 export default defineComponent({
-    components: { Header, ProductList },
-    data() {
-        return {
-            productListData: [],
-        };
-    },
-    mounted() {
-        async function getProductList() {
-            const response = await fetch("http://localhost:8000/productList");
-            const jsonData = await response.json();
-
-            return jsonData;
-        }
-
-        getProductList().then((response) => {
-            this.productListData = response;
-        });
-    },
+    components: { Header, CatalogueDisplay },
 });
 </script>
 <template>
     <div>
         <Header />
-        <ProductList :product-list="productListData" />
+        <CatalogueDisplay />
     </div>
 </template>

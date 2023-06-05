@@ -26,7 +26,7 @@ export default {
 };
 </script>
 <template>
-    <div class="grid justify-center content-center my-8 flex-col gap-4">
+    <div>
         <ProductItem
             v-for="item in productList"
             :name="item.name"
