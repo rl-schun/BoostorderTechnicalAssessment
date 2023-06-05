@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('productList', [CatalogueController::class, 'index'])->name('index');
+Route::get('productList/{pageNum?}', [CatalogueController::class, 'index'])->name('index');

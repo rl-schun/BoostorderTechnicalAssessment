@@ -26,7 +26,7 @@ export default {
 };
 </script>
 <template>
-    <div>
+    <div class="grid gap-2">
         <ProductItem
             v-for="item in productList"
             :name="item.name"

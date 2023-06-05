@@ -3,16 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Route;
 
 class CatalogueController extends Controller
 {
     //
     public function index() {
+        $pageNum = Route::current()->parameter('pageNum');
         $authedRequest = Http::withBasicAuth(env('MANGOMART_USERNAME'),env('MANGOMART_PASSWORD'));
-        $raw_data = $authedRequest->get('https://mangomart-autocount.myboostorder.com/wp-json/wc/v1/products');
+        $raw_data = $authedRequest->get("https://mangomart-autocount.myboostorder.com/wp-json/wc/v1/products?page={$pageNum}");
         $json_data = json_decode($raw_data);
         
-        $result = $this->filterRawData($json_data);
+        $usableProductList = $this->filterRawData($json_data);
+        $result = [
+            "productList"=> $usableProductList,
+            "totalPage"=> $raw_data->header("X-WP-TotalPages"),
+        ];
 
         return response()->json($result);
     }

@@ -9,18 +9,38 @@ export default {
     data() {
         return {
             productListData: [],
+            totalPage: 0,
+            page: 1,
         };
     },
-    mounted() {
-        async function getProductList() {
-            const response = await fetch("http://localhost:8000/productList");
+    methods: {
+        async getProductList(pageNum) {
+            const response = await fetch(
+                `http://localhost:8000/productList/${pageNum}`
+            );
             const jsonData = await response.json();
 
             return jsonData;
-        }
-
-        getProductList().then((response) => {
-            this.productListData = response;
+        },
+        async updatePageNum(newPageNum) {
+            this.page = newPageNum;
+            this.productListData = [];
+            this.loadProductList(newPageNum);
+        },
+        loadProductList(pageNum) {
+            this.getProductList(pageNum).then((response) => {
+                this.productListData = response.productList;
+                this.totalPage = response.totalPage;
+            });
+        },
+        test() {
+            console.log("hello world");
+        },
+    },
+    mounted() {
+        this.getProductList(this.page).then((response) => {
+            this.productListData = response.productList;
+            this.totalPage = response.totalPage;
         });
     },
 };
@@ -37,6 +57,11 @@ export default {
         >
             Loading Products...
         </h2>
-        <Pagination class="justify-self-end" />
+        <Pagination
+            class="justify-self-end"
+            :current="page"
+            :total="+totalPage"
+            :updatePageNum="updatePageNum"
+        />
     </div>
 </template>
