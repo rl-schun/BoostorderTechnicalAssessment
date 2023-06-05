@@ -16,7 +16,9 @@ import { createApp } from "vue";
 const app = createApp({});
 
 import HomePage from "./components/organism/HomePage.vue";
+import CartPage from "./components/organism/CartPage.vue";
 app.component("home-page", HomePage);
+app.component("cart-page", CartPage);
 
 /**
  * The following block of code may be used to automatically register your

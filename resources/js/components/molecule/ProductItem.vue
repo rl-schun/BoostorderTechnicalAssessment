@@ -7,6 +7,7 @@ export default {
         image: String,
         name: String,
         categories: Array,
+        readonly: Boolean,
     },
     components: {
         TagGroup,
@@ -41,7 +42,7 @@ export default {
                 <h2 class="text-2xl mb-2">{{ name }}</h2>
                 <TagGroup :content="categories" />
             </div>
-            <div>
+            <div v-if="!readonly">
                 <Button
                     class="mt-8"
                     text="Add to Cart"

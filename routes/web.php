@@ -23,3 +23,7 @@ Route::get('productList/{pageNum?}', [CatalogueController::class, 'index'])->nam
 
 Route::get('cart', [OrderController::class, 'getCart'])->name('getCart');
 Route::post('cart', [OrderController::class, 'addCart'])->name('addCart');
+
+Route::get('mycart', function () {
+    return view('cart');
+});
