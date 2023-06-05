@@ -28,7 +28,7 @@ class CatalogueController extends Controller
                 'id' => $element->id,
                 'name' => $element->name,
                 'categories' => $element->categories,
-                'imageURL' => $element->images[0]->src_large
+                'imageURL' => $element->images[0]->src
             ]);
         }
 

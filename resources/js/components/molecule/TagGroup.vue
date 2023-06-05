@@ -8,9 +8,6 @@ export default {
     components: {
         Tag,
     },
-    created() {
-        console.log(this.content);
-    },
 };
 
 onMounted(() => {
@@ -20,6 +17,6 @@ onMounted(() => {
 
 <template>
     <div class="flex gap-2">
-        <Tag v-for="item in content" :text="item" />
+        <Tag v-for="item in content" :text="item.name" />
     </div>
 </template>

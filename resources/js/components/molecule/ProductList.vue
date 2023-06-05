@@ -4,6 +4,9 @@ export default {
     components: {
         ProductItem,
     },
+    props: {
+        productList: Array,
+    },
     data() {
         return {
             content: [
@@ -23,12 +26,12 @@ export default {
 };
 </script>
 <template>
-    <div class="grid justify-center content-center mt-8 flex-col gap-4">
+    <div class="grid justify-center content-center my-8 flex-col gap-4">
         <ProductItem
-            v-for="item in content"
+            v-for="item in productList"
             :name="item.name"
             :categories="item.categories"
-            :image="item.image"
+            :image="item.imageURL"
         />
     </div>
 </template>
