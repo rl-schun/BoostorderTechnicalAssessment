@@ -1,14 +1,14 @@
 <script>
 import Header from "../atom/Header.vue";
-import CartList from "../molecule/CartList.vue";
+import OrderList from "../molecule/OrderList.vue";
 import { defineComponent } from "vue";
 export default defineComponent({
-    components: { Header, CartList },
+    components: { Header, OrderList },
 });
 </script>
 <template>
     <div>
         <Header />
-        <CartList />
+        <OrderList />
     </div>
 </template>

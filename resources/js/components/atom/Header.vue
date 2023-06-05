@@ -7,7 +7,7 @@ export default {};
         <h1 class="text-white font-bold self-center justify-center flex">
             Mock eCommerce
         </h1>
-        <button>
+        <a class="self-center" href="/mycart">
             <svg
                 style="color: white"
                 xmlns="http://www.w3.org/2000/svg"
@@ -22,6 +22,6 @@ export default {};
                     fill="white"
                 ></path>
             </svg>
-        </button>
+        </a>
     </div>
 </template>

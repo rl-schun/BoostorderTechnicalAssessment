@@ -27,3 +27,8 @@ Route::post('cart', [OrderController::class, 'addCart'])->name('addCart');
 Route::get('mycart', function () {
     return view('cart');
 });
+Route::post('createorder', [OrderController::class, 'createOrder'])->name('createOrder');
+Route::get('order', [OrderController::class, 'getOrderList'])->name('getOrderList');
+Route::get('admin', function () {
+    return view('admin');
+});
