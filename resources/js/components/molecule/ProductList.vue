@@ -29,6 +29,7 @@ export default {
     <div class="grid gap-2">
         <ProductItem
             v-for="item in productList"
+            :id="item.id"
             :name="item.name"
             :categories="item.categories"
             :image="item.imageURL"

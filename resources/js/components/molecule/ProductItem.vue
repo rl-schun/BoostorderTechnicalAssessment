@@ -3,6 +3,7 @@ import TagGroup from "./TagGroup.vue";
 import Button from "../atom/Button.vue";
 export default {
     props: {
+        id: String,
         image: String,
         name: String,
         categories: Array,
@@ -10,6 +11,22 @@ export default {
     components: {
         TagGroup,
         Button,
+    },
+    methods: {
+        addToCart() {
+            const data = {
+                id: this.id,
+                name: this.name,
+                imageURL: this.image,
+            };
+            fetch("/cart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+        },
     },
 };
 </script>
@@ -28,7 +45,7 @@ export default {
                 <Button
                     class="mt-8"
                     text="Add to Cart"
-                    :action="() => console.log('testing')"
+                    :action="this.addToCart"
                 />
             </div>
         </div>
