@@ -32,3 +32,5 @@ Route::get('order', [OrderController::class, 'getOrderList'])->name('getOrderLis
 Route::get('admin', function () {
     return view('admin');
 });
+Route::post('orderstatus', [OrderController::class, 'updateOrderStatus'])->name('updateOrderStatus');
+Route::get('notification', [OrderController::class, 'getNotificationCount'])->name('getNotificationCount');

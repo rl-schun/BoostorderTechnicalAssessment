@@ -22,6 +22,7 @@ class OrderController extends Controller
     public function getOrderList() {
         $results = DB::select('SELECT * FROM orderlist');
 
+
         return $results;
     }
 
@@ -35,7 +36,17 @@ class OrderController extends Controller
         DB::delete('DELETE FROM cart');
     }
 
-    public function updateOrderStatus(){
+    public function updateOrderStatus(Request $request){
+        $raw_data = $request->getContent();
+        $usable_data = json_decode($raw_data);
+        $newStatus = $usable_data->newStatus;
+        DB::update('UPDATE orderlist SET status=? WHERE status != "Completed"', [$newStatus]);
+        DB::update('INSERT INTO notification VALUES (?,?)', ["Your Order Status have been updated to {$newStatus}", 0]);
+    }
 
+    public function getNotificationCount(){
+        $results = DB::select('SELECT COUNT(*) AS total from notification WHERE isread != 1');
+
+        return $results;
     }
 }

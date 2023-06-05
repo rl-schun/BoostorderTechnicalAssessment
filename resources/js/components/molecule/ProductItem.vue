@@ -13,6 +13,11 @@ export default {
         TagGroup,
         Button,
     },
+    data() {
+        return {
+            clicked: false,
+        };
+    },
     methods: {
         addToCart() {
             const data = {
@@ -20,6 +25,8 @@ export default {
                 name: this.name,
                 imageURL: this.image,
             };
+
+            this.clicked = true;
             fetch("/cart", {
                 method: "POST",
                 headers: {
@@ -45,7 +52,7 @@ export default {
             <div v-if="!readonly">
                 <Button
                     class="mt-8"
-                    text="Add to Cart"
+                    :text="this.clicked ? '✔️' : 'Add to Cart'"
                     :action="this.addToCart"
                 />
             </div>

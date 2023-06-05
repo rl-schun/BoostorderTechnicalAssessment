@@ -9,7 +9,8 @@ export default {
     data() {
         return {
             orderList: [],
-            status: ["Pending", "Packed", "Delivery", "Complete"],
+            status: ["Pending", "Packed", "Delivery", "Completed"],
+            hideNextStageButton: false,
         };
     },
     methods: {
@@ -17,7 +18,32 @@ export default {
             const response = await fetch(`http://localhost:8000/order`);
             const jsonData = await response.json();
 
+            const indexOfCurrentStatus = this.status.indexOf(
+                jsonData[0].status
+            );
+            if (indexOfCurrentStatus + 1 == this.status.length) {
+                this.hideNextStageButton = true;
+            }
+
             return jsonData;
+        },
+        async updateOrderStatus() {
+            const indexOfCurrentStatus = this.status.indexOf(
+                this.orderList[0].status
+            );
+            if (indexOfCurrentStatus + 1 == this.status.length) {
+                return;
+            }
+
+            const newStatus = this.status[indexOfCurrentStatus + 1];
+            const body = { newStatus };
+
+            fetch("http://localhost:8000/orderstatus", {
+                method: "POST",
+                body: JSON.stringify(body),
+            });
+
+            this.orderList = await this.getOrderList();
         },
     },
     mounted() {
@@ -40,11 +66,11 @@ export default {
             :image="item.imageURL"
             :readonly="true"
         />
-        <div class="grid">
+        <div class="grid" v-if="!this.hideNextStageButton">
             <Button
                 class="justify-self-end"
-                text="Move to Packed"
-                :action="this.placeOrder"
+                text="Move to Next Stage"
+                :action="this.updateOrderStatus"
             />
         </div>
     </div>
